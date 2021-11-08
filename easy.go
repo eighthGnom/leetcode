@@ -95,6 +95,12 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+func min(l int, r int) int {
+	if l > r {
+		return r
+	}
+	return l
+}
 
 func minDepth(root *TreeNode) int {
 	switch {
@@ -105,14 +111,6 @@ func minDepth(root *TreeNode) int {
 	case root.Right == nil:
 		return 1 + minDepth(root.Left)
 	default:
-		l := minDepth(root.Left)
-		r := minDepth(root.Right)
-		switch {
-		case l > r:
-			return r + 1
-		case l < r:
-			return l + 1
-		}
+		return 1 + min(minDepth(root.Left), minDepth(root.Right))
 	}
-	return 1
 }
